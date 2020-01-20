@@ -13,7 +13,7 @@ install:
   - git clone https://github.com/flutter/flutter.git -b stable --depth 1
   - export PATH=./flutter/bin:$PATH
   - flutter doctor
-  - flutter --versionv
+  - flutter --version
 # This is the section where the tests are run using flutter test
 script:
   - flutter packages get
