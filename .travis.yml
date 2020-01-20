@@ -1,0 +1,25 @@
+# sets up the environment for the specified language. Dart isn’t officially supported by Travis but there’s a community supported version available.
+language: dart
+# specifies the Ubuntu base version which we’re using. In my case Its Ubuntu 18.04 Bionic.
+dist: bionic
+
+# Lets us specify any additional packages to be installed at runtime.
+addons:
+  apt:
+    packages:
+      - lib32stdc++6
+# We’re setting up the flutter build environment here and also running flutter doctor to verify the installation.
+install:
+  - git clone https://github.com/flutter/flutter.git -b stable --depth 1
+  - export PATH=./flutter/bin:$PATH
+  - flutter doctor
+  - flutter --versionv
+# This is the section where the tests are run using flutter test
+script:
+  - flutter packages get
+  - flutter analyze --no-pub --no-current-package lib/ test/
+  - flutter test --no-pub test/
+# This specifies the directory where dart will cache its packages.
+cache:
+  directories:
+    - $HOME/.pub-cache
