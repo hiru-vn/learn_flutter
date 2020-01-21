@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class ChatItem extends StatelessWidget{
   final int index;
 
-  ChatItem(this.index);
+  const ChatItem(this.index);
 
   @override
   Widget build(BuildContext context) {

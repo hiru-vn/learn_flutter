@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'conversation_page.dart';
 
 class ConversationPageList extends StatefulWidget {
+  const ConversationPageList();
 
   @override
   _ConversationPageListState createState() => _ConversationPageListState();
