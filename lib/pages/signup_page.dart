@@ -5,12 +5,26 @@ import 'package:learn_flutter/config/styles.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class SignUpPage extends StatefulWidget {
+  final Function _updateAgeState;
+  final int _age;
+
+  SignUpPage(this._updateAgeState, this._age);
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  int age = 15;
+  int age;
+  Function updateAgeState;
+
+  @override
+  void initState() {
+    age = widget._age;
+    updateAgeState = widget._updateAgeState;
+    
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +71,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   minValue: 15,
                   maxValue: 100,
                   highlightSelectedValue: true,
-                  onChanged: (num value) {
-                    setState(() {
-                      age = value;
-                    });
-                  }),
+                  onChanged: (num value) => this.updateAgeState(value.toInt()),
+                  ),
               Text('Years', style: Styles.textLight)
             ],
           ),

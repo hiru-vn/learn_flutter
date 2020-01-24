@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/config/pallete.dart';
-import 'package:learn_flutter/pages/conversation_page_list.dart';
+import 'package:learn_flutter/pages/register_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Palette.primaryColor,
       ),
-      home: ConversationPageList(),
+      home: RegisterPage(),
     );
   }
 }
