@@ -166,5 +166,35 @@ class _RegisterPageState extends State<RegisterPage>
         ));
   }
 
-  
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    usernameFieldAnimationController.dispose();
+    usernameFocusNode.dispose();
+    super.dispose();
+  }
+
+  ///
+  /// This routine is invoked when the window metrics have changed.
+  ///
+  @override
+  void didChangeMetrics() {
+    final value = MediaQuery.of(context).viewInsets.bottom;
+    if (value > 0) {
+      if (isKeyboardOpen) {
+        onKeyboardChanged(false);
+      }
+      isKeyboardOpen = false;
+    } else {
+      isKeyboardOpen = true;
+      onKeyboardChanged(true);
+    }
+  }
+
+  onKeyboardChanged(bool isVisible) {
+    if (!isVisible) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      usernameFieldAnimationController.reverse();
+    }
+  }
 }
