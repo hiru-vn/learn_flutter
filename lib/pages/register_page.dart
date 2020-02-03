@@ -176,6 +176,7 @@ class _RegisterPageState extends State<RegisterPage>
 
   ///
   /// This routine is invoked when the window metrics have changed.
+  /// Called when the application's dimensions change. When a phone is rotated, or keyboard pop up
   ///
   @override
   void didChangeMetrics() {
