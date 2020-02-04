@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:learn_flutter/pages/conversation_page.dart';
 import '../lib/widgets/chat_input.dart';
 import '../lib/widgets/chat_list.dart';
-import '../lib/widgets/chat_appbar.dart';
 
 void main(){
   const MaterialApp app = MaterialApp(
