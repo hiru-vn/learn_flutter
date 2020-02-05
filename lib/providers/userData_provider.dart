@@ -47,7 +47,7 @@ class UserDataProvider extends BaseUserDataProvider {
     DocumentReference ref =
         fireStoreDb.collection(Paths.usersPath).document(uid);  // get reference to the user/ uid node
     final DocumentSnapshot currentDocument = await ref.get();
-    return (currentDocument.exists&&
+    return (currentDocument.exists &&
         currentDocument.data.containsKey('username') &&
             currentDocument.data.containsKey('age')); // check if it exists, if yes then check if username and age field are there or not. If not then profile incomplete else complete
   }

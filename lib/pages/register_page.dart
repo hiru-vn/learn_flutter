@@ -14,13 +14,9 @@ class RegisterPage extends StatefulWidget {
   _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage>
-    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class _RegisterPageState extends State<RegisterPage>{
   AuthenticationBloc authenticationBloc;
   int currentPage = 0;
-  int age = 18;
-  var isKeyboardOpen = false;
-  //this variable keeps track of the keyboard, when its shown and when its hidden
 
   PageController pageController = PageController();
   // this is the controller of the page. This is used to navigate back and forth between the pages
@@ -40,31 +36,6 @@ class _RegisterPageState extends State<RegisterPage>
   }
 
   void initApp() async {
-    WidgetsBinding.instance.addObserver(this);
-    usernameFieldAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    profilePicHeightAnimation =
-        Tween(begin: 100.0, end: 0.0).animate(usernameFieldAnimationController)
-          ..addListener(() {
-            setState(() {});
-          });
-    usernameAnimation =
-        Tween(begin: 50.0, end: 10.0).animate(usernameFieldAnimationController)
-          ..addListener(() {
-            setState(() {});
-          });
-    ageAnimation =
-        Tween(begin: 80.0, end: 10.0).animate(usernameFieldAnimationController)
-          ..addListener(() {
-            setState(() {});
-          });
-    usernameFocusNode.addListener(() {
-      if (usernameFocusNode.hasFocus) {
-        usernameFieldAnimationController.forward();
-      } else {
-        usernameFieldAnimationController.reverse();
-      }
-    });
     pageController.addListener(() {
       setState(() {
         begin = Alignment(pageController.page, pageController.page);
@@ -227,38 +198,5 @@ class _RegisterPageState extends State<RegisterPage>
                   fontWeight: FontWeight.bold,
                   fontSize: 22)))
     ]);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    usernameFieldAnimationController.dispose();
-    usernameFocusNode.dispose();
-    super.dispose();
-  }
-
-  ///
-  /// This routine is invoked when the window metrics have changed.
-  /// Called when the application's dimensions change. When a phone is rotated, or keyboard pop up
-  ///
-  @override
-  void didChangeMetrics() {
-    final value = MediaQuery.of(context).viewInsets.bottom;
-    if (value > 0) {
-      if (isKeyboardOpen) {
-        onKeyboardChanged(false);
-      }
-      isKeyboardOpen = false;
-    } else {
-      isKeyboardOpen = true;
-      onKeyboardChanged(true);
-    }
-  }
-
-  onKeyboardChanged(bool isVisible) {
-    if (!isVisible) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      usernameFieldAnimationController.reverse();
-    }
   }
 }

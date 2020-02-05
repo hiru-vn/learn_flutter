@@ -27,6 +27,10 @@ class _SignUpPageState extends State<SignUpPage>
   ImageProvider profileImage;
   AuthenticationBloc authenticationBloc;
   final TextEditingController usernameController = TextEditingController();
+
+  //this variable keeps track of the keyboard, when its shown and when its hidden
+  var isKeyboardOpen = false;
+  
   //Fields related to animating the layout and pushing widgets up when the focus is on the username field
   AnimationController usernameFieldAnimationController;
   Animation profilePicHeightAnimation, usernameAnimation, ageAnimation;
@@ -199,5 +203,30 @@ class _SignUpPageState extends State<SignUpPage>
     usernameFieldAnimationController.dispose();
     usernameFocusNode.dispose();
     super.dispose();
+  }
+
+   ///
+  /// This routine is invoked when the window metrics have changed.
+  /// Called when the application's dimensions change. When a phone is rotated, or keyboard pop up
+  ///
+  @override
+  void didChangeMetrics() {
+    final value = MediaQuery.of(context).viewInsets.bottom;
+    if (value > 0) {
+      if (isKeyboardOpen) {
+        onKeyboardChanged(false);
+      }
+      isKeyboardOpen = false;
+    } else {
+      isKeyboardOpen = true;
+      onKeyboardChanged(true);
+    }
+  }
+
+  onKeyboardChanged(bool isVisible) {
+    if (!isVisible) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      usernameFieldAnimationController.reverse();
+    }
   }
 }
